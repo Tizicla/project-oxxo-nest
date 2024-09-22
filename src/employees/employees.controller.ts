@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
@@ -17,22 +17,24 @@ export class EmployeesController {
     return this.employeesService.findAll();
   }
 
-  @Get(':id') // Decorador que indica que se va a recibir un parámetro en la ruta.
+  @Get('/:id') // Decorador que indica que se va a recibir un parámetro en la ruta.
   findOne(
-    @Param('id') // Decorador que modifica el valor de id para que absorba el valor de la ruta.
+    @Param('id', new ParseUUIDPipe({version: '4'})) // Decorador que modifica el valor de id para que absorba el valor de la ruta.
     id: string 
   ) {
-    return this.employeesService.findOne(+id); // Se llama al método findOne del servicio y se le pasa el id. 
+    return this.employeesService.findOne(id); // Se llama al método findOne del servicio y se le pasa el id. 
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    return this.employeesService.update(+id, updateEmployeeDto);
+  @Patch('/:id')
+  update(@Param('id', new ParseUUIDPipe({version: '4'})) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
+    return this.employeesService.update(id, updateEmployeeDto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(
-  @Param('id') id: string) {
-  return this.employeesService.remove(+id);
+  @Param('id', new ParseUUIDPipe({version: '4'})) 
+  id:string
+  ){
+  return this.employeesService.remove(id);
   }
 }

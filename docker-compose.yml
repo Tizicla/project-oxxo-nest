@@ -1,0 +1,14 @@
+version: '3' # Version of docker-compose
+
+services:   # Services that will be used in the project
+  db:
+    image: postgres:14.3 # Image of the database
+    restart: always # Restart the container if it fails
+    ports:
+      - '5432:5432' # Port that will be used to connect to the database
+    environment:  # Environment variables
+      POSTGRES_PASSWORD: ${pass} # Password of the database
+      POSTGRES_DB: ${name} # Name of the database
+    container_name: oxxo_db # Name of the container
+    volumes:
+      - ./postgres:/var/lib/postgresql/data # Volume that will be used to store the data of the database
