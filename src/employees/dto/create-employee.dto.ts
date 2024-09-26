@@ -6,11 +6,13 @@ export class CreateEmployeeDto {
     name: string;
     @IsString()
     @MaxLength(70)
-    lastname: string;
+    lastName: string;
     @IsString()
     @MaxLength(10)
-    phoneNum: string;
+    phoneNumber: string;
     @IsString()
     @IsEmail()
     email:string;
 }
+
+

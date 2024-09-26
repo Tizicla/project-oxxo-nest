@@ -12,3 +12,5 @@ services:   # Services that will be used in the project
     container_name: oxxo_db # Name of the container
     volumes:
       - ./postgres:/var/lib/postgresql/data # Volume that will be used to store the data of the database
+
+      

@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, IsNull } from 'typeorm';
+import { Provider } from 'src/providers/entities/provider.entity';
+import { Entity, Column, PrimaryGeneratedColumn, IsNull, ManyToOne } from 'typeorm';
 @Entity()
 
 export class Product {
     @PrimaryGeneratedColumn("uuid")
-    productID: string;
+    productId: string;
     
     @Column({type: "text"})
     productName: string;
@@ -16,4 +17,8 @@ export class Product {
     
     //@Column({type: "uuid"})
     //provider: string;
+    @ManyToOne(() => Provider, (provider) => provider.products, {
+        eager:true,
+    })
+    provider: Provider;
 }

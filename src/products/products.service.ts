@@ -14,30 +14,6 @@ export class ProductsService {
     private productRepository: Repository<Product>
   ){}
 
-  private products: CreateProductDto[] = [
-    {
-      productID: uuid(),
-      productName: "Sabritas Limón",
-      price: 29,
-      countSeal: 3,
-      provider: uuid(),
-    },
-    {
-      productID: uuid(),
-      productName: "Coca-Cola 600 ml",
-      price: 25,
-      countSeal: 2,
-      provider: uuid(),  
-    },
-    {
-      productID: uuid(),
-      productName: "Agua Ciel 600 ml",
-      price: 10,
-      countSeal: 2,
-      provider: uuid(),  
-    },
-  ]
-
   create(createProductDto: CreateProductDto) {
     const product = this.productRepository.save(createProductDto);
     return product; 
@@ -49,21 +25,19 @@ export class ProductsService {
 
   findOne(id: string) {
     const product = this.productRepository.findOneBy({
-      productID:id,
+      productId:id,
     })
     if (!product) throw new NotFoundException( `Product with ID ${id} not found`);
     return product;
   }
 
   findbyProvider(id:string){
-    const productsFound = this.products.filter((product) => product.provider === id);
-    if (!productsFound) throw new NotFoundException(`Products with provider ID ${id} not found`);
-    return productsFound;
+    return "OK"
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
     const productToUpdate = await this.productRepository.preload({
-      productID:id,
+      productId:id,
       ...updateProductDto
     })
     if (!productToUpdate) throw new NotFoundException(`Product with ID ${id} not found`);
@@ -74,7 +48,7 @@ export class ProductsService {
   remove(id: string) {
     this.findOne(id)
     this.productRepository.delete({
-      productID:id
+      productId:id
     })
     return {
       message: `Product with ID ${id} deleted`
