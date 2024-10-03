@@ -13,6 +13,7 @@ export class RegionsService {
     @InjectRepository(Region)
     private regionRepository: Repository<Region>
   ) {}
+  
   create(createRegionDto: CreateRegionDto) {
     return this.regionRepository.save(createRegionDto);
   }
