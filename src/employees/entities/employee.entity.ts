@@ -3,23 +3,23 @@ import { Location } from 'src/locations/entities/location.entity';
 
 @Entity()
 export class Employee {
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn('uuid')
     employeeID: string;
     
-    @Column({type: "text"})
+    @Column('text')
     name: string;
     
-    @Column({type: "text"})
+    @Column('text' )
     lastName: string;
     
-    @Column({type: "text"})
+    @Column('text')
     phoneNumber: string;
 
-    @Column({type: "text"})
+    @Column('text')
     email: string;
 
     @Column({
-        type: "text",
+        type: 'text',
         nullable: true
     })
     photoUrl: string; // URL to the employee's photo
