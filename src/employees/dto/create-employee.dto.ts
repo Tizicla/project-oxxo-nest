@@ -4,19 +4,7 @@ import { Location } from "src/locations/entities/location.entity";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 
-export class LocationEmployeeDto extends Location{
-    @ApiProperty()
-    locationId: number;
 
-    @ApiPropertyOptional()
-    locationName: string;
-
-    @ApiPropertyOptional()
-    locationAddress: string;
-
-    @ApiPropertyOptional()
-    locationCoordinates: number[];
-}
 
 export class CreateEmployeeDto extends Employee{
     @ApiProperty()
@@ -42,7 +30,7 @@ export class CreateEmployeeDto extends Employee{
     @ApiPropertyOptional()
     @IsOptional()
     @IsObject()
-    location: LocationEmployeeDto;
+    location: Location;
 }
 
 
