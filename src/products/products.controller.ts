@@ -5,7 +5,9 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ValidationMetadata } from 'class-validator/types/metadata/ValidationMetadata';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ROLES } from 'src/auth/constants/roles.constants';
+import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
+@ApiAuth()
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

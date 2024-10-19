@@ -22,16 +22,24 @@ export class EmployeesService {
     return this.employeeRepository.find();
   }
 
+  findByLocation(id:number){
+    return this.employeeRepository.findBy({
+        location:{
+          locationId:id
+      }
+    });
+  }
+
   findOne(id: string) {
     const employee = this.employeeRepository.findOneBy({
-      employeeID: id
+      employeeId: id
     })
     return employee;
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
     const emploteeToUpdate = await this.employeeRepository.preload({
-      employeeID: id,
+      employeeId: id,
       ...updateEmployeeDto
     });
     this.employeeRepository.save(emploteeToUpdate);
@@ -40,7 +48,7 @@ export class EmployeesService {
 
   remove(id: string) {
     this.employeeRepository.delete({
-      employeeID: id
+      employeeId: id
     });
     return{
       message: `Employee with id ${id} has been deleted`
