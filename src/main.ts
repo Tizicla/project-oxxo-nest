@@ -4,7 +4,11 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      origin: process.env.allowedOrigin,
+    }
+  });
   const config = new DocumentBuilder()
     .setTitle('Oxxo API')
     .setDescription('API for Oxxo management')
@@ -18,7 +22,7 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }))
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();
 
