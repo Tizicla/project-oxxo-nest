@@ -24,7 +24,7 @@ export class AuthController {
     let expireDate = new Date();
     expireDate.setDate(expireDate.getDay()+7)
     response.cookie(TOKEN_NAME, token, {
-      httpOnly: false,
+      httpOnly: true,
       secure: true,
       sameSite: 'none',
       expires: expireDate,
